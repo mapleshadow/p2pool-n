@@ -48,6 +48,25 @@ nets = dict(
         VERSION_WARNING=lambda v: 'Upgrade Litecoin to >=0.8.5.1!' if v < 80501 else None,
     ),
 
+    tenfivecoin=math.Object(
+        PARENT=networks.nets['tenfivecoin'],
+        SHARE_PERIOD=15, # seconds
+        CHAIN_LENGTH=24*60*60//10, # shares
+        REAL_CHAIN_LENGTH=24*60*60//10, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=12, # blocks
+        IDENTIFIER='a06a81c827cab9ff'.decode('hex'),
+        PREFIX='7c3614a6bcdcf7ff'.decode('hex'),
+        P2P_PORT=10569,
+        MIN_TARGET=4,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=True,
+        WORKER_PORT=10579,
+        BOOTSTRAP_ADDRS='162.248.163.195'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-tenfive',
+        VERSION_CHECK=lambda v: True,
+    ),
+
     vertcoin=math.Object(
         PARENT=networks.nets['vertcoin'],
         SHARE_PERIOD=15, # seconds
@@ -102,6 +121,24 @@ nets = dict(
         WORKER_PORT=9173,
         BOOTSTRAP_ADDRS='exe.p2pool.info freebtc.eu'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-exe',
+        VERSION_CHECK=lambda v: True,
+    ),
+        rotocoin=math.Object(
+        PARENT=networks.nets['rotocoin'],
+        SHARE_PERIOD=30, # seconds
+        CHAIN_LENGTH=24*60*60//10, # shares
+        REAL_CHAIN_LENGTH=24*60*60//10, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=12, # blocks
+        IDENTIFIER='726f746f726f746f'.decode('hex'),
+        PREFIX='6f726f746f726f74'.decode('hex'),
+        P2P_PORT=7273,
+        MIN_TARGET=4,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=False,
+        WORKER_PORT=7274,
+        BOOTSTRAP_ADDRS='freebtc.eu'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-roto',
         VERSION_CHECK=lambda v: True,
     ),
                                                                                                                                             
