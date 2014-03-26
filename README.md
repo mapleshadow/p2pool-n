@@ -2,7 +2,9 @@ P2Pool Server Node software for Scrypt-N coins. Currently supported:
 * Vertcoin [VTC]
 * GPUCoin [GPUC]
 * Execoin [EXE]
-
+* Rotocoin [RT2]
+* 10-5coin [10-5]
+* SPAcoin [SPA]
 
 Requirements:
 -------------------------

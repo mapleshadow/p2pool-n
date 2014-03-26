@@ -135,13 +135,33 @@ nets = dict(
         P2P_PORT=7273,
         MIN_TARGET=4,
         MAX_TARGET=2**256//2**20 - 1,
-        PERSIST=False,
+        PERSIST=True,
         WORKER_PORT=7274,
         BOOTSTRAP_ADDRS='freebtc.eu'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-roto',
         VERSION_CHECK=lambda v: True,
     ),
-                                                                                                                                            
+
+    spaincoin=math.Object(
+        PARENT=networks.nets['spaincoin'],
+        SHARE_PERIOD=15, # seconds
+        CHAIN_LENGTH=24*60*60//10, # shares
+        REAL_CHAIN_LENGTH=24*60*60//10, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=12, # blocks
+        IDENTIFIER='e238d5b8c6931492'.decode('hex'),
+        PREFIX='7409c1a53ef71492'.decode('hex'),
+        P2P_PORT=26491,
+        MIN_TARGET=,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=True,
+        WORKER_PORT=26490,
+        BOOTSTRAP_ADDRS='p2pool2.crunchpool.com p2pool.crunchpool.com spa.boulderbtc.com p2pooleu.cloudapp.net 31.31.72.59'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-spa',
+        VERSION_CHECK=lambda v: True,
+        VERSION_WARNING=lambda v: 'Upgrade Spaincoin to >=0.8.8.0!' if v < 80800 else None,
+    ),
+
 )
 for net_name, net in nets.iteritems():
     net.NAME = net_name
