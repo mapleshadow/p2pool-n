@@ -201,8 +201,8 @@ nets = dict(
         DUMB_SCRYPT_DIFF=2**16,
         DUST_THRESHOLD=0.03e8,
     ),
-
-      rotocoin=math.Object(
+       
+    rotocoin=math.Object(
         P2P_PREFIX='fabfb5da'.decode('hex'),
         P2P_PORT=28820,
         ADDRESS_VERSION=61,

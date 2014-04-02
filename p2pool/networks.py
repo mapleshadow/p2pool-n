@@ -67,7 +67,7 @@ nets = dict(
         VERSION_CHECK=lambda v: True,
     ),
 
-    vertcoin=math.Object(
+    vertcoin=math.Object( # --> main net
         PARENT=networks.nets['vertcoin'],
         SHARE_PERIOD=15, # seconds
         CHAIN_LENGTH=24*60*60//10, # shares
@@ -82,6 +82,25 @@ nets = dict(
         PERSIST=False,
         WORKER_PORT=9171,
         BOOTSTRAP_ADDRS='q30.qhor.net seed.p2pool.etyd.org vtc.royalminingco.com'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-vtc',
+        VERSION_CHECK=lambda v: True,
+    ),
+
+    vertcoin2=math.Object( # --> low hashrate net
+        PARENT=networks.nets['vertcoin'],
+        SHARE_PERIOD=15, # seconds
+        CHAIN_LENGTH=24*60*60//10, # shares
+        REAL_CHAIN_LENGTH=24*60*60//10, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=12, # blocks
+        IDENTIFIER='a06a81c827cab974'.decode('hex'),
+        PREFIX='7c3614a6bcdcf795'.decode('hex'),
+        P2P_PORT=9346,
+        MIN_TARGET=4,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=False,
+        WORKER_PORT=9172,
+        BOOTSTRAP_ADDRS='lovok.no-ip.com us-east.p2pools.net vert.marcsi.ch'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-vtc',
         VERSION_CHECK=lambda v: True,
     ),
@@ -123,7 +142,8 @@ nets = dict(
         ANNOUNCE_CHANNEL='#p2pool-exe',
         VERSION_CHECK=lambda v: True,
     ),
-        rotocoin=math.Object(
+    
+    rotocoin=math.Object(
         PARENT=networks.nets['rotocoin'],
         SHARE_PERIOD=30, # seconds
         CHAIN_LENGTH=24*60*60//10, # shares
@@ -135,9 +155,9 @@ nets = dict(
         P2P_PORT=7273,
         MIN_TARGET=4,
         MAX_TARGET=2**256//2**20 - 1,
-        PERSIST=True,
+        PERSIST=False,
         WORKER_PORT=7274,
-        BOOTSTRAP_ADDRS='freebtc.eu'.split(' '),
+        BOOTSTRAP_ADDRS='lovok.no-ip.com rt2.hashcrop.info'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-roto',
         VERSION_CHECK=lambda v: True,
     ),
