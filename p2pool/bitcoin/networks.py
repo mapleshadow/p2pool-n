@@ -8,6 +8,20 @@ from p2pool.util import math, pack, jsonrpc
 from operator import *
 
 # SpainCoin subsidy function
+def get_tenfivesubsidy(bnHeight):
+    if bnHeight == 1:
+        nSubsidy = 105000
+    elif bnHeight <= 1050:
+        nSubsidy = 1.57079632
+    elif bnHeight <= 3150:
+        nSubsidy = 3.14159265
+    elif bnHeight <= 4000:
+        nSubsidy = 9.8596
+    else:
+        nSubsidy = 3.14159265
+
+    return int(nSubsidy * 1000000)
+
 SPASUBSIDY = [ 0, 940, 3492, 6069, 8673, 11304, 13963, 16650, 19366, 22112, 24887, 27694, 30532, 33402, 36305, 39241, 42213, 45219, 48262, 51342, 54459, 57616, 60812, 64050, 67329, 70652, 74018, 77430, 80889, 84396, 87952, 91559, 95218, 98930, 102698, 106523, 110407, 114351, 118358, 122429, 126566, 130773, 135051, 139402, 143830, 148336, 152924, 157597, 162358, 167210, 172157, 177203, 182351, 187607, 192974, 198457, 204062, 209794, 215659, 221663, 227813, 234116, 240581, 247215, 254027, 261028, 268229, 275641, 283276, 291149, 299275, 307671, 316355, 325347, 334672, 344353, 354420, 364904, 375841, 387273, 399246, 411814, 425039, 438994, 453765, 469451, 486176, 504084, 523359, 544224, 566966, 591957, 619690, 650844, 686380, 727739, 777208, 838764, 920291, 1041340, 1281967 ];
 def spa_sub(n):
     i, a, b = 0, 1, 100
@@ -24,20 +38,6 @@ def spa_sub(n):
             b = i-1
 
     return 101-i
-
-def get_tenfivesubsidy(bnHeight):
-    if bnHeight == 1:
-        nSubsidy = 105000
-    elif bnHeight <= 1050:
-        nSubsidy = 1.57079632
-    elif bnHeight <= 3150:
-        nSubsidy = 3.14159265
-    elif bnHeight <= 4000:
-        nSubsidy = 9.8596
-    else:
-        nSubsidy = 3.14159265
-
-    return int(nSubsidy * 1000000)
 
 def get_subsidy(nCap, nMaxSubsidy, bnTarget):
     bnLowerBound = 0.01
@@ -238,8 +238,7 @@ nets = dict(
         POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('vtc_scrypt').getPoWHash(data)),
         BLOCK_PERIOD=120, # s
         SYMBOL='SPA',
-        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 
-		    'Spaincoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Spaincoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.spaincoin'), 'spaincoin.conf'),
+        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Spaincoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Spaincoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.spaincoin'), 'spaincoin.conf'),
         BLOCK_EXPLORER_URL_PREFIX='http://explorer.spaincoin.org/block/',
         ADDRESS_EXPLORER_URL_PREFIX='http://explorer.spaincoin.org/address/',
         TX_EXPLORER_URL_PREFIX='http://explorer.spaincoin.org/tx/',
